@@ -11,7 +11,7 @@ const Blog = () => {
       author: "Dr. Sarah Mitchell",
       date: "March 15, 2024",
       readTime: "5 min read",
-      image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=400",
+      image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600",
       category: "AI Trends"
     },
     {
@@ -21,18 +21,48 @@ const Blog = () => {
       author: "Michael Chen",
       date: "March 12, 2024",
       readTime: "8 min read",
-      image: "https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=400",
+      image: "https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=600",
       category: "Career Advice"
     },
     {
       id: 3,
       title: "Machine Learning vs Deep Learning: Understanding the Difference",
-      excerpt: "A comprehensive comparison of machine learning and deep learning approaches and their applications.",
+      excerpt: "A comprehensive comparison of machine learning and deep learning approaches, their applications, and when to use each.",
       author: "Emily Rodriguez",
       date: "March 10, 2024",
       readTime: "6 min read",
-      image: "https://images.pexels.com/photos/8386422/pexels-photo-8386422.jpeg?auto=compress&cs=tinysrgb&w=400",
+      image: "https://images.pexels.com/photos/8386422/pexels-photo-8386422.jpeg?auto=compress&cs=tinysrgb&w=600",
       category: "Technical"
+    },
+    {
+      id: 4,
+      title: "AI Ethics: Building Responsible AI Systems",
+      excerpt: "Learn about the ethical considerations in AI development and how to create AI systems that benefit society.",
+      author: "Dr. James Wilson",
+      date: "March 8, 2024",
+      readTime: "7 min read",
+      image: "https://images.pexels.com/photos/8386433/pexels-photo-8386433.jpeg?auto=compress&cs=tinysrgb&w=600",
+      category: "Ethics"
+    },
+    {
+      id: 5,
+      title: "Natural Language Processing: From Text to Understanding",
+      excerpt: "Discover how NLP is revolutionizing human-computer interaction and the latest breakthroughs in language models.",
+      author: "Lisa Thompson",
+      date: "March 5, 2024",
+      readTime: "9 min read",
+      image: "https://images.pexels.com/photos/8386439/pexels-photo-8386439.jpeg?auto=compress&cs=tinysrgb&w=600",
+      category: "NLP"
+    },
+    {
+      id: 6,
+      title: "Computer Vision Applications in Healthcare",
+      excerpt: "Explore how computer vision is transforming medical diagnosis and treatment through innovative AI applications.",
+      author: "Dr. Mark Johnson",
+      date: "March 3, 2024",
+      readTime: "6 min read",
+      image: "https://images.pexels.com/photos/8386423/pexels-photo-8386423.jpeg?auto=compress&cs=tinysrgb&w=600",
+      category: "Healthcare"
     }
   ];
 
@@ -40,26 +70,29 @@ const Blog = () => {
     const colors = {
       'AI Trends': 'bg-blue-100 text-blue-800',
       'Career Advice': 'bg-green-100 text-green-800',
-      'Technical': 'bg-purple-100 text-purple-800'
+      'Technical': 'bg-purple-100 text-purple-800',
+      'Ethics': 'bg-orange-100 text-orange-800',
+      'NLP': 'bg-indigo-100 text-indigo-800',
+      'Healthcare': 'bg-pink-100 text-pink-800'
     };
     return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section id="blog" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Latest AI Insights
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Latest from Our Blog
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Stay updated with the latest trends, tutorials, and insights from the world of artificial intelligence
+            Stay updated with the latest trends, career advice, and technical insights from industry experts
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
-            <article key={post.id} className="bg-gray-50 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200">
+            <article key={post.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
               <div className="relative">
                 <img
                   src={post.image}
@@ -74,7 +107,7 @@ const Blog = () => {
               </div>
               
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-blue-600 transition-colors duration-200">
                   {post.title}
                 </h3>
                 
@@ -108,13 +141,11 @@ const Blog = () => {
           ))}
         </div>
 
-        <div className="text-center">
-          <Link
-            to="/blog"
-            className="inline-flex items-center px-8 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors duration-200"
-          >
-            View All Articles
-            <ArrowRight className="ml-2 h-5 w-5" />
+        <div className="text-center mt-12">
+          <Link to="/blog">
+            <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">
+              View All Blog Posts
+            </button>
           </Link>
         </div>
       </div>

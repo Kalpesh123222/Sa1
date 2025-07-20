@@ -1,105 +1,77 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, Star, Users, Award } from 'lucide-react';
+import { Play, ArrowRight, Sparkles } from 'lucide-react';
 
 const Hero = () => {
-  const stats = [
-    { number: '500+', label: 'Students Trained' },
-    { number: '4.9/5', label: 'Average Rating' },
-    { number: '100+', label: 'AI Courses' },
-    { number: '50+', label: 'Countries' }
-  ];
-
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-100 flex items-center">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="text-center lg:text-left">
-            <div className="mb-6">
-              <span className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-                <Star className="h-4 w-4 mr-2" />
-                #1 AI Education Platform
-              </span>
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Master{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Artificial Intelligence
-              </span>{' '}
-              with Expert Guidance
-            </h1>
-            
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl">
-              Transform your career with comprehensive AI education. Learn machine learning, deep learning, 
-              and cutting-edge AI technologies from industry experts.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Link
-                to="/courses"
-                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
-              >
-                Explore Courses
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              
-              <button className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors duration-200">
-                <Play className="mr-2 h-5 w-5" />
-                Watch Demo
-              </button>
-            </div>
-            
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-2xl font-bold text-gray-900">{stat.number}</div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-100">
+        <div className="absolute inset-0 opacity-30">
+          <div className="w-full h-full" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }}></div>
+        </div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-blue-200 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-16 h-16 bg-purple-200 rounded-full opacity-20 animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-20 w-24 h-24 bg-indigo-200 rounded-full opacity-20 animate-pulse delay-2000"></div>
+        <div className="absolute bottom-40 right-10 w-12 h-12 bg-pink-200 rounded-full opacity-20 animate-pulse delay-500"></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-4xl mx-auto">
+          {/* Badge */}
+          <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-8 border border-blue-200">
+            <Sparkles className="h-4 w-4 text-blue-600" />
+            <span className="text-sm font-medium text-gray-700">Leading AI Education Platform</span>
           </div>
-          
-          {/* Right Content */}
-          <div className="relative">
-            <div className="relative z-10">
-              <img
-                src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="AI Learning"
-                className="rounded-2xl shadow-2xl"
-              />
-              
-              {/* Floating Cards */}
-              <div className="absolute -top-6 -left-6 bg-white rounded-lg shadow-lg p-4 hidden lg:block">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                    <Award className="h-5 w-5 text-green-600" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Certified</div>
-                    <div className="text-sm text-gray-600">Industry Recognition</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-lg p-4 hidden lg:block">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                    <Users className="h-5 w-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-gray-900">15,000+</div>
-                    <div className="text-sm text-gray-600">Active Students</div>
-                  </div>
-                </div>
-              </div>
+
+          {/* Main Headline */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            Master AI with{' '}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Expert-Led Courses
+            </span>
+            <br />
+            at Scalezix Academy
+          </h1>
+
+          {/* Subtext */}
+          <p className="text-xl sm:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Learn cutting-edge AI skills from top instructors and become an industry leader with 
+            hands-on projects and real-world applications.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            <Link to="/courses">
+              <button className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 flex items-center space-x-2">
+                <span>Explore Courses</span>
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
+            <button className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white transition-all duration-200 flex items-center space-x-2 border border-gray-200">
+              <Play className="h-5 w-5" />
+              <span>Watch Demo</span>
+            </button>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16">
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200">
+              <div className="text-3xl font-bold text-blue-600 mb-2">500+</div>
+              <div className="text-gray-600">Students Trained</div>
             </div>
-            
-            {/* Background Elements */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-2xl transform rotate-6 opacity-20"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl transform -rotate-6 opacity-20"></div>
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200">
+              <div className="text-3xl font-bold text-purple-600 mb-2">50+</div>
+              <div className="text-gray-600">Courses</div>
+            </div>
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200">
+              <div className="text-3xl font-bold text-indigo-600 mb-2">4.9/5</div>
+              <div className="text-gray-600">Student Rating</div>
+            </div>
           </div>
         </div>
       </div>

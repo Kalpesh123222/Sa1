@@ -28,6 +28,14 @@ const Testimonials = () => {
       content: "The practical approach to learning AI at Scalezix is unmatched. Working on real-world projects gave me the confidence to apply for positions at top tech companies.",
       rating: 5,
       course: "Computer Vision Fundamentals"
+    },
+    {
+      name: "David Kim",
+      role: "AI Product Manager at Amazon",
+      image: "https://images.pexels.com/photos/3778876/pexels-photo-3778876.jpeg?auto=compress&cs=tinysrgb&w=150",
+      content: "Scalezix Academy doesn't just teach you AI concepts - they teach you how to think like an AI professional. The career support and networking opportunities are incredible.",
+      rating: 5,
+      course: "AI Fundamentals"
     }
   ];
 
@@ -49,47 +57,50 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section id="testimonials" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             What Our Students Say
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Hear from successful AI professionals who transformed their careers with our courses
+            Join thousands of successful AI professionals who transformed their careers with Scalezix Academy
           </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-              <div className="text-center lg:text-left">
+        <div className="relative">
+          {/* Main Testimonial */}
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 md:p-12 border border-gray-200">
+            <div className="flex flex-col lg:flex-row items-center gap-8">
+              <div className="flex-shrink-0">
                 <img
                   src={testimonials[currentTestimonial].image}
                   alt={testimonials[currentTestimonial].name}
-                  className="w-24 h-24 rounded-full object-cover border-4 border-gray-200 mx-auto lg:mx-0 mb-4"
+                  className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
                 />
+              </div>
+              
+              <div className="flex-1 text-center lg:text-left">
+                <Quote className="h-8 w-8 text-blue-600 mb-4 mx-auto lg:mx-0" />
+                <blockquote className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
+                  "{testimonials[currentTestimonial].content}"
+                </blockquote>
+                
                 <div className="mb-4">
-                  <div className="font-bold text-gray-900 text-lg mb-1">
+                  <div className="font-bold text-gray-900 text-lg">
                     {testimonials[currentTestimonial].name}
                   </div>
-                  <div className="text-blue-600 font-medium mb-2">
+                  <div className="text-blue-600 font-medium">
                     {testimonials[currentTestimonial].role}
                   </div>
-                  <div className="text-sm text-gray-500">
-                    {testimonials[currentTestimonial].course}
+                  <div className="text-sm text-gray-500 mt-1">
+                    Completed: {testimonials[currentTestimonial].course}
                   </div>
                 </div>
+                
                 <div className="flex justify-center lg:justify-start">
                   {renderStars(testimonials[currentTestimonial].rating)}
                 </div>
-              </div>
-              
-              <div className="lg:col-span-2">
-                <Quote className="h-8 w-8 text-blue-600 mb-4" />
-                <blockquote className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                  "{testimonials[currentTestimonial].content}"
-                </blockquote>
               </div>
             </div>
           </div>
@@ -121,6 +132,28 @@ const Testimonials = () => {
                 }`}
               />
             ))}
+          </div>
+        </div>
+
+        {/* Success Stories Grid */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-blue-600 mb-2">500+</div>
+              <div className="text-gray-600">Students Trained</div>
+            </div>
+          </div>
+          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-purple-600 mb-2">150%</div>
+              <div className="text-gray-600">Average Salary Increase</div>
+            </div>
+          </div>
+          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-green-600 mb-2">4.9/5</div>
+              <div className="text-gray-600">Student Satisfaction</div>
+            </div>
           </div>
         </div>
       </div>

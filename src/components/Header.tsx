@@ -1,150 +1,117 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, Brain, ChevronDown } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCoursesDropdownOpen, setIsCoursesDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
-  const navigation = [
-    { name: 'Home', href: '/' },
-    { 
-      name: 'Courses', 
-      href: '/courses',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'All Courses', href: '/courses' },
-        { name: 'AI Fundamentals', href: '/courses?category=AI%20Fundamentals' },
-        { name: 'Machine Learning', href: '/courses?category=Machine%20Learning' },
-        { name: 'Deep Learning', href: '/courses?category=Deep%20Learning' },
-        { name: 'NLP', href: '/courses?category=NLP' },
-        { name: 'Computer Vision', href: '/courses?category=Computer%20Vision' }
-      ]
-    },
-    { name: 'About', href: '/about' },
-    { name: 'Admissions', href: '/admissions' },
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navItems = [
+    { name: 'Courses', href: '/courses' },
     { name: 'Internships', href: '/internships' },
     { name: 'Workshop', href: '/workshop' },
-    { name: 'Testimonials', href: '/testimonials' },
-    { name: 'Contact', href: '/contact' }
+    { name: 'Contact', href: '/contact' },
   ];
 
-  const isActive = (href: string) => {
-    return location.pathname === href;
+  const isActive = (path: string) => {
+    return location.pathname === path;
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
+    <header className={`fixed w-full z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/90 backdrop-blur-sm'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">S</span>
+          <div className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-lg">
+              <Brain className="h-8 w-8 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">Scalezix Academy</span>
-          </Link>
+            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Scalezix Academy
+            </span>
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <div key={item.name} className="relative">
-                {item.hasDropdown ? (
-                  <div
-                    className="relative"
-                    onMouseEnter={() => setIsCoursesDropdownOpen(true)}
-                    onMouseLeave={() => setIsCoursesDropdownOpen(false)}
-                  >
-                    <Link
-                      to={item.href}
-                      className={`flex items-center px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                        isActive(item.href)
-                          ? 'text-blue-600'
-                          : 'text-gray-700 hover:text-blue-600'
-                      }`}
-                    >
-                      {item.name}
-                      <ChevronDown className="ml-1 h-4 w-4" />
-                    </Link>
-                    
-                    {isCoursesDropdownOpen && (
-                      <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2">
-                        {item.dropdownItems?.map((dropdownItem) => (
-                          <Link
-                            key={dropdownItem.name}
-                            to={dropdownItem.href}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600"
-                          >
-                            {dropdownItem.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <Link
-                    to={item.href}
-                    className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                      isActive(item.href)
-                        ? 'text-blue-600'
-                        : 'text-gray-700 hover:text-blue-600'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                )}
-              </div>
+          <nav className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`transition-colors duration-200 font-medium ${
+                  isActive(item.href) 
+                    ? 'text-blue-600 border-b-2 border-blue-600 pb-1' 
+                    : 'text-gray-700 hover:text-blue-600'
+                }`}
+                aria-label={`Navigate to ${item.name}`}
+              >
+                {item.name}
+              </Link>
             ))}
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <Link
-              to="/admissions"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
-            >
-              Enroll Now
+          <div className="hidden md:flex items-center space-x-4">
+            <Link to="/courses">
+              <button 
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
+                aria-label="Start learning courses"
+              >
+                Start Learning
+              </button>
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <button
+            className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+            aria-label="Toggle mobile menu"
+            aria-expanded={isMenuOpen}
           >
-            {isMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 py-4">
-            <div className="space-y-2">
-              {navigation.map((item) => (
+          <div className="md:hidden bg-white border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${
-                    isActive(item.href)
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                  className={`block px-3 py-2 transition-colors duration-200 ${
+                    isActive(item.href) 
+                      ? 'text-blue-600 bg-blue-50' 
+                      : 'text-gray-700 hover:text-blue-600'
                   }`}
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-label={`Navigate to ${item.name}`}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Link
-                to="/admissions"
-                onClick={() => setIsMenuOpen(false)}
-                className="block mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg font-medium text-center"
-              >
-                Enroll Now
+              <Link to="/courses">
+                <button 
+                  className="w-full mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg font-medium"
+                  aria-label="Start learning courses"
+                >
+                  Start Learning
+                </button>
               </Link>
             </div>
           </div>

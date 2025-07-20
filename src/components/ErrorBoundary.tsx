@@ -11,28 +11,27 @@ interface State {
 }
 
 class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { hasError: false };
-  }
+  public state: State = {
+    hasError: false
+  };
 
-  static getDerivedStateFromError(error: Error): State {
+  public static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo);
+  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Uncaught error:', error, errorInfo);
   }
 
-  handleReload = () => {
+  private handleRefresh = () => {
     window.location.reload();
   };
 
-  handleGoHome = () => {
+  private handleGoHome = () => {
     window.location.href = '/';
   };
 
-  render() {
+  public render() {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
@@ -46,37 +45,26 @@ class ErrorBoundary extends Component<Props, State> {
             </h1>
             
             <p className="text-gray-600 mb-8">
-              We encountered an unexpected error. Don't worry, our team has been notified and we're working on a fix.
+              We're sorry, but something unexpected happened. Please try refreshing the page or go back to the homepage.
             </p>
             
-            <div className="space-y-3">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={this.handleReload}
-                className="w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                onClick={this.handleRefresh}
+                className="flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
               >
                 <RefreshCw className="h-4 w-4 mr-2" />
-                Try Again
+                Refresh Page
               </button>
               
               <button
                 onClick={this.handleGoHome}
-                className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                className="flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
               >
                 <Home className="h-4 w-4 mr-2" />
                 Go Home
               </button>
             </div>
-            
-            {process.env.NODE_ENV === 'development' && this.state.error && (
-              <details className="mt-6 text-left">
-                <summary className="cursor-pointer text-sm text-gray-500 hover:text-gray-700">
-                  Error Details (Development)
-                </summary>
-                <pre className="mt-2 text-xs text-red-600 bg-red-50 p-3 rounded overflow-auto">
-                  {this.state.error.stack}
-                </pre>
-              </details>
-            )}
           </div>
         </div>
       );
